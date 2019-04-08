@@ -32,9 +32,4 @@ void int_to_ascii(int n, char str[]) {
     /* TODO: implement "reverse" */
 }
 
-void * malloc(int nbytes) {
-	char variable[nbytes];
-	return &variable;
-}       
-
 #endif

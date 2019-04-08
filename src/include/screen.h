@@ -3,9 +3,8 @@
 #include "types.h"
 #include "system.h"
 #include "string.h"
-int tc = 0x0F;
 int cursorX = 0, cursorY = 0;
-const uint8 sw = 80,sh = 25,sd = 2;                                                     //We define the screen width, height, and depth.
+const uint8 sw = 80,sh = 25,sd = 2; 
 void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
@@ -56,6 +55,9 @@ void scrollUp(uint8 lineNumber)
         updateCursor();
 }
 
+void newline() {
+	printch('\n');
+}
 
 void newLineCheck()
 {
@@ -89,7 +91,7 @@ void printch(char c)
                 break;
         default:
                 vidmem [((cursorY * sw + cursorX))*sd] = c;
-                vidmem [((cursorY * sw + cursorX))*sd+1] = tc;
+                vidmem [((cursorY * sw + cursorX))*sd+1] = 0x0F;
                 cursorX++; 
                 break;
 	
@@ -106,63 +108,15 @@ void printch(char c)
 void print (string ch)
 {
         uint16 i = 0;
-        uint8 length = strlength(ch)-1;
+        uint8 length = strlength(ch)-1;              //Updated (Now we store string length on a variable to call the function only once)
         for(i;i<length;i++)
         {
                 printch(ch[i]);
         }
+       /* while((ch[i] != (char)0) && (i<=length))
+                print(ch[i++]);*/
+        
 }
 
-void ctc(string colors) {
-	if (colors == "00") {
-		tc = 0x00;
-	}
-	else if (colors == "01") {
-		tc = 0x01;
-	}
-	else if (colors == "02") {
-		tc = 0x02;
-	}
-	else if (colors == "03") {
-		tc = 0x03;
-	}
-	else if (colors == "04") {
-		tc = 0x04;
-	}
-	else if (colors == "05") {
-		tc = 0x05;
-	}
-	else if (colors == "06") {
-		tc = 0x06;
-	}
-	else if (colors == "07") {
-		tc = 0x07;
-	}
-	else if (colors == "08") {
-		tc = 0x08;
-	}
-	else if (colors == "09") {
-		tc = 0x09;
-	}
-	else if (colors == "0A") {
-		tc = 0x0A;
-	}
-	else if (colors == "0B") {
-		tc = 0x0B;
-	}
-	else if (colors == "0C") {
-		tc = 0x0C;
-	}
-	else if (colors == "0D") {
-		tc = 0x0D;
-	}
-	else if (colors == "0E") {
-		tc = 0x0E;
-	}
-	else if (colors == "0F") {
-		tc = 0x0F;
-	}
-	clearScreen();
-}
 
 #endif
