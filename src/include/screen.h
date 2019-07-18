@@ -1,14 +1,17 @@
 #ifndef SCREEN_H
 #define SCREEN_H
+
+#define DEPRECATED_ATTRIBUTE     __attribute__((deprecated))
+
 #include "types.h"
 #include "system.h"
 #include "string.h"
 int cursorX = 0, cursorY = 0;
 const uint8 sw = 80,sh = 25,sd = 2; 
+string vidmem=(string)0xb8000;
 void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
-        string vidmem=(string)0xb8000;
         for(i;i<(sw*to*sd);i++)
         {
                 vidmem[i] = 0x0;
@@ -35,7 +38,6 @@ void clearScreen()
 
 void scrollUp(uint8 lineNumber)
 {
-        string vidmem = (string)0xb8000;
         uint16 i = 0;
         clearLine(0,lineNumber-1);                                            //updated
         for (i;i<sw*(sh-1)*2;i++)
@@ -59,6 +61,7 @@ void newline() {
 	printch('\n');
 }
 
+
 void newLineCheck()
 {
         if(cursorY >=sh-1)
@@ -68,8 +71,7 @@ void newLineCheck()
 }
 
 void printch(char c)
-{
-    string vidmem = (string) 0xb8000;     
+{    
     switch(c)
     {
         case (0x08):
@@ -105,18 +107,25 @@ void printch(char c)
     newLineCheck();
 }
 
-void print (string ch)
-{
-        uint16 i = 0;
-        uint8 length = strlength(ch)-1;              //Updated (Now we store string length on a variable to call the function only once)
-        for(i;i<length;i++)
-        {
-                printch(ch[i]);
-        }
-       /* while((ch[i] != (char)0) && (i<=length))
-                print(ch[i++]);*/
-        
+void putchar(char c) {
+	printch(c);
 }
 
+void print(string ch)
+{
+    while(*ch != 0) {
+		putchar(*ch);
+		ch++;
+	}
+}
+
+__attribute__ ((deprecated)) void printf(string ch) {
+	uint16 i = 0;
+    uint8 length = strlength(ch)-1;
+    for(i;i<length;i++)
+    {
+        printch(ch[i]);
+    }
+}
 
 #endif

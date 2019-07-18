@@ -4,6 +4,9 @@
 #include "system.h"
 #include "types.h"
 
+uint8 ceb = 0;
+string lastcmd;
+
 string readStr()
 {
     char buff;
@@ -17,11 +20,11 @@ string readStr()
         {
             switch(inportb(0x60))
             { 
-      /*case 1:
-                printch('(char)27);           Escape button
-                buffstr[i] = (char)27;
-                i++;
-                break;*/
+        //case 1:
+				//print(lastcmd);
+                //i = strlength(lastcmd);
+				//buffstr = lastcmd;
+                //break;
         case 2:
                 printch('1');
                 buffstr[i] = '1';
@@ -87,11 +90,11 @@ string readStr()
                 i--;
                 buffstr[i] = 0;
                 break;
-       /* case 15:
-                printch('\t');          Tab button
-                buffstr[i] = '\t';
+        case 15:
+                printch((char)240);          //Tab button
+                buffstr[i] = (char)240;
                 i++;
-                break;*/
+                break;
         case 16:
 				if(shift == 0){
 					printch('q');
@@ -240,8 +243,9 @@ string readStr()
         case 28:
                // printch('\n');
                // buffstr[i] = '\n';
-                  i++;
-               reading = 0;
+			    print_serial("0x02 ", 0);
+                i++;
+				reading = 0;
                 break;
       /*  case 29:
                 printch('q');           Left Control
@@ -363,16 +367,17 @@ string readStr()
                 i++;
                 break;
         case 40:
-                printch((char)44);               //   Single quote (')
-                buffstr[i] = (char)44;
+                printch((char)96);               //   Single quote (')
+                buffstr[i] = (char)96;
                 i++;
                 break;
         case 41:
-                printch((char)44);               // Back tick (`)
-                buffstr[i] = (char)44;
+                printch((char)96);               // Back tick (`)
+                buffstr[i] = (char)96;
                 i++;
                 break;
         case 42:
+				print_serial("0x03 ", 0);
 		        if(shift == 0){
 					shift = 1;
 					break;
