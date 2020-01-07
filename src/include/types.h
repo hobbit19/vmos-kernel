@@ -1,3 +1,7 @@
+//Variable types
+//Last modified: VMOS 1.0.4
+//Made by VMGP
+
 #ifndef TYPES_H
 #define TYPES_H
 

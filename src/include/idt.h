@@ -1,3 +1,7 @@
+//IDT Interrupt Handler
+//Last modified: VMOS 1.0.4
+//Made by VMGP
+
 #ifndef IDT_H
 #define IDT_H
 
@@ -22,8 +26,6 @@ typedef struct {
 idt_gate_t idt[IDT_ENTRIES];
 idt_register_t idt_reg;
 
-
-/* Functions implemented in idt.c */
 #include "util.h"
 
 void set_idt_gate(int n, uint32 handler) {

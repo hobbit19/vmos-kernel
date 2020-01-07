@@ -1,3 +1,7 @@
+//Keyboard driver
+//Last modified: VMOS 1.0.4
+//Made by VMGP
+
 #ifndef KB_H
 #define KB_H
 #include "screen.h"
@@ -19,7 +23,7 @@ string readStr()
         if(inportb(0x64) & 0x1)                 
         {
             switch(inportb(0x60))
-            { 
+            {
         //case 1:
 				//print(lastcmd);
                 //i = strlength(lastcmd);
@@ -86,10 +90,12 @@ string readStr()
                 i++;
                 break;
         case 14:
-                printch('\b');
-                i--;
-                buffstr[i] = 0;
-                break;
+				if (i > 0) {
+					printch('\b');
+					i--;
+					buffstr[i] = 0;
+				}
+				break;
         case 15:
                 printch((char)240);          //Tab button
                 buffstr[i] = (char)240;
@@ -241,8 +247,9 @@ string readStr()
 				}
                 break;
         case 28:
-               // printch('\n');
-               // buffstr[i] = '\n';
+				// printch('\n');
+				// buffstr[i] = '\n';
+				buffstr[i] = '\0';
 			    print_serial("0x02 ", 0);
                 i++;
 				reading = 0;
@@ -323,7 +330,6 @@ string readStr()
                     buffstr[i] = 'H';
 					i++;
 				}
-                i++;
                 break;
         case 36:
                 if(shift == 0){

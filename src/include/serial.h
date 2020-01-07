@@ -1,9 +1,13 @@
+//Serial controller
+//Last modified: VMOS 1.0.4
+//Made by VMGP
+
 #ifndef SERIAL_H
 #define SERIAL_H
 
 #include "system.h"
 
-#define PORT 0x3f8   /* COM1 */
+#define PORT 0x3f8   //COM1 
 
 int debug = 1; 
  
@@ -16,6 +20,7 @@ void init_serial() {
    outportb(PORT + 3, 0x03);    // 8 bits, no parity, one stop bit
    outportb(PORT + 2, 0xC7);    // Enable FIFO, clear them, with 14-byte threshold
    outportb(PORT + 4, 0x0B);    // IRQs enabled, RTS/DSR set
+   print_serial("VMOS_SerialDriver_1.0.4 ", 0);
 }
 
 //Reading
@@ -48,11 +53,14 @@ void print_serial(string ch, int newline)
 		write_serial(*ch);
 		ch++;
 	}
+	if (newline == 1) {
+		serial_newline();
+	}
 }
 
-void newline_serial(string ch)
+void debug_f(string ch)
 {
-    write_serial('\n');
+    print_serial(ch, 0);
 }
 
 void ss_serial() {
@@ -63,6 +71,16 @@ void ss_serial() {
 		print("Debugging was started by the user on port COM1");
 		debug = 1;
 	}
+}
+
+void serial_newline() {
+	outportb(PORT + 1, 0x00);    // Disable all interrupts
+	outportb(PORT + 3, 0x80);    // Enable DLAB (set baud rate divisor)
+	outportb(PORT + 0, 0x03);    // Set divisor to 3 (lo byte) 38400 baud
+	outportb(PORT + 1, 0x00);    //                  (hi byte)
+	outportb(PORT + 3, 0x03);    // 8 bits, no parity, one stop bit
+	outportb(PORT + 2, 0xC7);    // Enable FIFO, clear them, with 14-byte threshold
+	outportb(PORT + 4, 0x0B);    // IRQs enabled, RTS/DSR set
 }
 
 #endif

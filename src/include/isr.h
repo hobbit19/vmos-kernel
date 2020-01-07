@@ -1,3 +1,7 @@
+//ISR Interrupt Handler
+//Last modified: VMOS 1.0.4
+//Made by VMGP
+
 #ifndef ISR_H
 #define ISR_H
 
@@ -337,8 +341,6 @@ void isr_install() {
 	newline();
     print("Debug: Setting IDT gate 31... "); 
     set_idt_gate(31, (uint32)isr31);
-
-    set_idt(); // Load with ASM
 }
 
 

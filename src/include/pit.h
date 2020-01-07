@@ -1,41 +1,41 @@
-#ifndef SPEAKER_H
-#define SPEAKER_H
+//PIT controller
+//Last modified: VMOS 1.0.4
+//Made by VMGP
 
+#ifndef SERIAL_H
+#define SERIAL_H
+
+#include "system.h"
+#include "util.h"
 #include "screen.h"
 #include "kb.h"
 #include "string.h"
-#include "system.h"
-#include "util.h"
-#include "power.h"
 #include "isr.h"
 #include "idt.h"
-#include "idt.h"
-#include "ioapic.h"
+#include "serial.h"
+#include "cmos.h"
 
-struct TimerBlock {
-    EXCHANGE e;
-    uint32 CountDown;
-} timerblocks[20];
- 
-void TimerIRQ(void) /* called from Assembly */
-{
-    uint8_t i;
- 
-    for (i = 0; i < 20; i++)
-        if (timerblocks[i].CountDown > 0) {
-            timerblocks[i].CountDown--;
-            if (timerblocks[i].CountDown == 0)
-                SendMessage(timerblocks[i].e, COUNTDOWN_DONE_MESSAGE);
-        }
+int timer_ticks = 0;
+
+void PIT_irq() {
+	timer_ticks++; //Incrmements ticks value
 }
- 
-void Sleep(uint32 delay)
+
+void timer_phase(int hz)
 {
-    struct TimerBlock *t;
- 
-    if ((t = findTimerBlock()) == nil)
-        return;
-    t->CountDown = delay;
-    WaitForMessageFrom(t->e = getCrntExch());
+    int divisor = 1193180 / hz;
+    outportb(0x43, 0x36);
+    outportb(0x40, divisor & 0xFF);
+    outportb(0x40, divisor >> 8);
 }
+
+int get_ticks() {
+	return timer_ticks; //Returns how many ticks have passed
+}
+
+void PIT_setup() {
+	timer_phase(100);
+	set_idt_gate(32, (uint32)PIT_irq); //Install IRQ
+}
+
 #endif
