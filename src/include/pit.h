@@ -2,8 +2,8 @@
 //Last modified: VMOS 1.0.4
 //Made by VMGP
 
-#ifndef SERIAL_H
-#define SERIAL_H
+#ifndef PIT_H
+#define PIT_H
 
 #include "system.h"
 #include "util.h"
