@@ -1,6 +1,6 @@
 ### VMOS
 
-#Introduction
+# Introduction
 
 This is a small operating system written in C and Assembly.
 
@@ -8,7 +8,7 @@ New small update:
 - Crash messages are now displayed in the COM1 port
 - Fixed some GUI things
 
-#Compiling and making an iso image
+# Compiling and making an iso image
 
 For compiling and making the disk image you need to work on Linux and make sure that you have these packages installed: `nasm`, `gcc`, `grub-mkrescue`
 
