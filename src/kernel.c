@@ -1,5 +1,5 @@
 //Main kernel script
-//Last modified: VMOS 1.0.4
+//Last modified: VMOS 1.0.4.1
 //Made by VMGP
 
 #include "include/system.h"
@@ -50,7 +50,7 @@ kmain()
 				printch((char)176);
 				printch((char)177);
 				printch((char)178);
-				print(" VMOS 1.0.4 ");
+				print(" VMOS 1.0.4.1 ");
 				printch((char)178);
 				printch((char)177);
 				printch((char)176);
@@ -99,6 +99,8 @@ kmain()
 			}
 			else if(strEql(cmdline, "gui"))
 			{
+				videomode();
+				VgaTest();
 				mode = 1;
 			}
 			else
@@ -114,7 +116,7 @@ kmain()
 			newline();
 		}
 		else if (mode == 1) {
-			VgaTest();
+			
 		}
 	} while (running == 0);
 }

@@ -1,5 +1,5 @@
 //ISR Interrupt Handler
-//Last modified: VMOS 1.0.4
+//Last modified: VMOS 1.0.4.1
 //Made by VMGP
 
 #ifndef ISR_H
@@ -9,238 +9,273 @@
 #include "isr.h"
 #include "idt.h"
 #include "screen.h"
+#include "serial.h"
 #include "util.h"
 #include "system.h"
 
 string exception_messages[32] = {
-    "(0x01) Division By Zero ",
-    "(0x02) Debug ",
-    "(0x03) Non Maskable Interrupt ",
-    "(0x04) Breakpoint ",
-    "(0x05) Into Detected Overflow ",
-    "(0x06) Out of Bounds ",
-    "(0x07) Invalid Opcode ",
-    "(0x08) No Coprocessor ",
+    "(0x00) Division By Zero ",
+    "(0x01) Reserved ",
+    "(0x02) Non Maskable Interrupt ",
+    "(0x03) Breakpoint ",
+    "(0x04) Into Detected Overflow ",
+    "(0x05) Out of Bounds ",
+    "(0x06) Invalid Opcode ",
+    "(0x07) No Coprocessor ",
 
-    "(0x09) Double Fault ",
-    "(0x0A) Coprocessor Segment Overrun ",
-    "(0x0B) Bad TSS ",
-    "(0x0C) Segment Not Present ",
-    "(0x0D) Stack Fault ",
-    "(0x0E) General Protection Fault ",
-    "(0x0F) Page Fault ",
-    "(0x10) Unknown Interrupt ",
+    "(0x08) Double Fault ",
+    "(0x09) Coprocessor Segment Overrun ",
+    "(0x0A) Bad TSS ",
+    "(0x0B) Segment Not Present ",
+    "(0x0C) Stack Fault ",
+    "(0x0D) General Protection Fault ",
+    "(0x0E) Page Fault ",
+    "(0x0F) Unknown Interrupt ",
 
-    "(0x11) Coprocessor Fault ",
-    "(0x12) Alignment Check ",
-    "(0x13) Machine Check ",
+    "(0x10) Coprocessor Fault ",
+    "(0x11) Alignment Check ",
+    "(0x12) Machine Check ",
+    "(0x13) SIMD Floating-Point Exception ",
     "(0x14) Reserved ",
     "(0x15) Reserved ",
     "(0x16) Reserved ",
     "(0x17) Reserved ",
-    "(0x18) Reserved ",
 
+    "(0x18) Reserved ",
     "(0x19) Reserved ",
     "(0x1A) Reserved ",
     "(0x1B) Reserved ",
     "(0x1C) Reserved ",
     "(0x1D) Reserved ",
     "(0x1E) Reserved ",
-    "(0x1F) Reserved ",
-    "(0x20) Reserved "
+    "(0x1F) Reserved "
 };
 
 /*Handlers*/
 void isr0()
 {
-	newline();
-    print(exception_messages[0]);
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[0], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr1()
 {
-	newline();
-    print(exception_messages[1]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[1], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr2()
 {
-	newline();
-    print(exception_messages[2]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[2], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr3()
 {
-	newline();
-    print(exception_messages[3]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[3], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr4()
 {
-	newline();
-    print(exception_messages[4]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[4], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr5()
 {
-	newline();
-    print(exception_messages[5]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[5], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr6()
 {
-	newline();
-    print(exception_messages[6]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[6], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr7()
 {
-	newline();
-    print(exception_messages[7]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[7], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr8()
 {
-	newline();
-    print(exception_messages[8]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[8], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr9()
 {
-	newline();
-    print(exception_messages[9]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[9], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr10()
 {
-	newline();
-    print(exception_messages[10]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[10], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr11()
 {
-	newline();
-    print(exception_messages[11]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[11], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr12()
 {
-	newline();
-    print(exception_messages[12]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[12], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr13()
 {
-	newline();
-    print(exception_messages[13]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[13], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr14()
 {
-	newline();
-    print(exception_messages[14]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[14], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr15()
 {
-	newline();
-    print(exception_messages[15]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[15], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr16()
 {
-	newline();
-    print(exception_messages[16]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[16], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr17()
 {
-	newline();
-    print(exception_messages[17]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[17], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr18()
 {
-	newline();
-    print(exception_messages[18]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[18], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr19()
 {
-	newline();
-    print(exception_messages[19]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[19], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr20()
 {
-	newline();
-    print(exception_messages[20]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[20], 0);
+	print_serial("]", 0);
     crash();
 }
+
 void isr21()
 {
-	newline();
-    print(exception_messages[21]);    
+print_serial("[Crash: ", 0);
+    print_serial(exception_messages[21], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr22()
 {
-	newline();
-    print(exception_messages[22]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[22], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr23()
 {
-	newline();
-    print(exception_messages[23]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[23], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr24()
 {
-	newline();
-    print(exception_messages[24]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[24], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr25()
 {
-	newline();
-    print(exception_messages[25]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[25], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr26()
 {
-	newline();
-    print(exception_messages[26]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[26], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr27()
 {
-	newline();
-    print(exception_messages[27]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[27], 0);
+	print_serial("]", 0);
     crash();
 }
+
 void isr28()
 {
-	newline();
-    print(exception_messages[28]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[28], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr29()
 {
-	newline();
-    print(exception_messages[29]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[29], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr30()
 {
-	newline();
-    print(exception_messages[30]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[30], 0);
+	print_serial("]", 0);
     crash();
 }
 void isr31()
 {
-	newline();
-    print(exception_messages[31]);    
+	print_serial("[Crash: ", 0);
+    print_serial(exception_messages[31], 0);
+	print_serial("]", 0);
     crash();
 }
 

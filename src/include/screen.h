@@ -1,5 +1,5 @@
 //Screen Controller
-//Last modified: VMOS 1.0.4
+//Last modified: VMOS 1.0.4.1
 //Made by VMGP
 
 #ifndef SCREEN_H
@@ -190,7 +190,7 @@ void videomode() {
 	outportb(0x3C0, 0x20); // enable video
 }
 
-void VgaDrawPixel(unsigned x, unsigned y, unsigned c)
+void gui_DrawPixel(unsigned x, unsigned y, unsigned c)
 {
 	uint8 *vga = (uint8*)0xA0000;
 	int offset = y * 320 + x;
@@ -198,25 +198,24 @@ void VgaDrawPixel(unsigned x, unsigned y, unsigned c)
 }
 
 
-void VgaClear(uint8 color)
+void gui_SetBackground(uint8 color)
 {
 	int w, h;
 	for (w = 0; w < 320; w++)
 	{
 	for (h = 0; h < 200; h++)
-		VgaDrawPixel(w, h, color);
+		gui_DrawPixel(w, h, color);
 	}  
 }
 
 void VgaTest() {
-	videomode();
-	VgaClear(0);
-	VgaDrawPixel(12, 12, 15);
-	VgaDrawPixel(13, 12, 1);
-	VgaDrawPixel(14, 12, 2);
-	VgaDrawPixel(15, 12, 3);
-	VgaDrawPixel(16, 12, 4);
-	VgaDrawPixel(17, 12, 5);
+	gui_SetBackground(0);
+	gui_DrawPixel(12, 12, 15);
+	gui_DrawPixel(13, 12, 1);
+	gui_DrawPixel(14, 12, 2);
+	gui_DrawPixel(15, 12, 3);
+	gui_DrawPixel(16, 12, 4);
+	gui_DrawPixel(17, 12, 5);
 }
 
 #endif

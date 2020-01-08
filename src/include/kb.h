@@ -1,5 +1,5 @@
 //Keyboard driver
-//Last modified: VMOS 1.0.4
+//Last modified: VMOS 1.0.4.1
 //Made by VMGP
 
 #ifndef KB_H
@@ -7,9 +7,6 @@
 #include "screen.h"
 #include "system.h"
 #include "types.h"
-
-uint8 ceb = 0;
-string lastcmd;
 
 string readStr()
 {

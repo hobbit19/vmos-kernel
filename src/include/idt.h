@@ -1,5 +1,5 @@
 //IDT Interrupt Handler
-//Last modified: VMOS 1.0.4
+//Last modified: VMOS 1.0.4.1
 //Made by VMGP
 
 #ifndef IDT_H

@@ -1,5 +1,5 @@
 //Serial controller
-//Last modified: VMOS 1.0.4
+//Last modified: VMOS 1.0.4.1
 //Made by VMGP
 
 #ifndef SERIAL_H
@@ -20,7 +20,7 @@ void init_serial() {
    outportb(PORT + 3, 0x03);    // 8 bits, no parity, one stop bit
    outportb(PORT + 2, 0xC7);    // Enable FIFO, clear them, with 14-byte threshold
    outportb(PORT + 4, 0x0B);    // IRQs enabled, RTS/DSR set
-   print_serial("VMOS_SerialDriver_1.0.4 ", 0);
+   print_serial("VMOS_SerialDriver_1.0.4.1 ", 0);
 }
 
 //Reading
