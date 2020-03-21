@@ -15,10 +15,11 @@ For compiling and making the disk image you need to work on Linux and make sure 
 Compiling the OS (execute these commands IN LINUX):
 ```nasm -f elf32 src/kernel.asm -o o/kasm.o
 gcc -m32 -c src/kernel.c -o o/kc.o -ffreestanding
-ld -m elf_i386 -T link.ld -o kernel1.bin o/kasm.o o/kc.o```
-
+ld -m elf_i386 -T link.ld -o kernel1.bin o/kasm.o o/kc.o
+```
 
 And for making a disk image:
 ```- rm vmos/bin/kernel1.bin
 - cp kernel1.bin vmos/bin/kernel1.bin
-- grub-mkrescue -o main.iso vmos```
+- grub-mkrescue -o main.iso vmos
+```
