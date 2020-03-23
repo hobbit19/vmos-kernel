@@ -4,9 +4,8 @@
 
 This is a small operating system written in C and Assembly.
 
-New small update:
-- Crash messages are now displayed in the COM1 port
-- Fixed some GUI things
+New update:
+- Unreal mode (in a way)
 
 ### Compiling and making an iso image
 
